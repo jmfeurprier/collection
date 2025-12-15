@@ -1,0 +1,36 @@
+{
+    "name": "jmf/collection",
+    "description" : "Eases common operations with collections (arrays, iterables, etc).",
+    "license": "mit",
+    "type": "library",
+    "require": {
+        "php": ">=8.3"
+    },
+    "require-dev": {
+        "overtrue/phplint": "^9.6",
+        "phpmd/phpmd": "^2.15.0",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^2.1.11",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^12.3",
+        "rector/rector": "^2.0.10",
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Jmf\\Collection\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jmf\\Collection\\": "tests/src"
+        }
+    }
+}
