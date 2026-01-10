@@ -7,21 +7,16 @@
         "php": ">=8.3"
     },
     "require-dev": {
-        "overtrue/phplint": "^9.6",
-        "phpmd/phpmd": "^2.15.0",
-        "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.11",
-        "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^12.3",
-        "rector/rector": "^2.0.10",
-        "squizlabs/php_codesniffer": "^4.0"
+        "overtrue/phplint": "^9.7",
+        "phpstan/phpstan": "^2.1.33",
+        "phpstan/phpstan-strict-rules": "^2.0.7",
+        "phpunit/phpunit": "^12.5.4",
+        "rector/rector": "^2.3.0",
+        "squizlabs/php_codesniffer": "^4.0.1"
     },
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {

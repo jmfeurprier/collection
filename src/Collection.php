@@ -81,7 +81,7 @@ class Collection
         iterable $keys,
     ): mixed {
         if ([] === $keys) {
-            throw new CollectionException("No keys provided.");
+            throw new CollectionException('No keys provided.');
         }
 
         foreach ($keys as $key) {
