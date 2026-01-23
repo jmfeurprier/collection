@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jmf\Collection;
 
 use Jmf\Collection\Exception\CollectionException;
@@ -46,16 +48,6 @@ class Collection
      * @template T
      *
      * @param T[] $collection
-     */
-    public static function count(iterable $collection): int
-    {
-        return count((array) $collection);
-    }
-
-    /**
-     * @template T
-     *
-     * @param T[] $collection
      *
      * @return T
      *
@@ -68,6 +60,34 @@ class Collection
         }
 
         throw new CollectionException('Collection is empty.');
+    }
+
+    /**
+     * @template T
+     *
+     * @param T[] $collection
+     *
+     * @return T|null
+     *
+     * @throws CollectionException
+     */
+    public static function firstOrNull(iterable $collection): mixed
+    {
+        foreach ($collection as $item) {
+            return $item;
+        }
+
+        return null;
+    }
+
+    /**
+     * @template T
+     *
+     * @param T[] $collection
+     */
+    public static function count(iterable $collection): int
+    {
+        return count((array) $collection);
     }
 
     /**
@@ -94,7 +114,12 @@ class Collection
             }
 
             if (!array_key_exists($key, $array)) {
-                throw new CollectionException("Array does not contain key '{$key}'.");
+                throw new CollectionException(
+                    sprintf(
+                        "Array does not contain key '%s'.",
+                        $key,
+                    ),
+                );
             }
 
             $array = $array[$key];

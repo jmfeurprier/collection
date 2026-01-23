@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jmf\Collection;
 
 use Jmf\Collection\Exception\CollectionException;
 use PHPUnit\Framework\TestCase;
 
-class CollectionTest extends TestCase
+final class CollectionTest extends TestCase
 {
     public function testOneOrNullWithEmptyCollectionWillReturnNull(): void
     {
@@ -59,32 +61,6 @@ class CollectionTest extends TestCase
         );
     }
 
-    public function testCountWithEmptyCollectionWillReturnZero(): void
-    {
-        $result = Collection::count([]);
-
-        self::assertSame(0, $result);
-    }
-
-    public function testCountWithOneItemCollectionWillReturnOne(): void
-    {
-        $result = Collection::count(['foo']);
-
-        self::assertSame(1, $result);
-    }
-
-    public function testFirstWithTwoItemsCollectionWillReturnTwo(): void
-    {
-        $result = Collection::count(
-            [
-                'foo',
-                'bar',
-            ],
-        );
-
-        self::assertSame(2, $result);
-    }
-
     public function testFirstWithEmptyCollectionWillThrow(): void
     {
         self::expectException(CollectionException::class);
@@ -109,6 +85,58 @@ class CollectionTest extends TestCase
         );
 
         self::assertSame('foo', $result);
+    }
+
+    public function testFirstOrNullWithEmptyCollectionWillThrow(): void
+    {
+        $result = Collection::firstOrNull([]);
+
+        self::assertNull($result);
+    }
+
+    public function testFirstOrNullWithOneItemCollectionWillReturnItem(): void
+    {
+        $result = Collection::firstOrNull(['foo']);
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testFirstOrNullWithManyItemsCollectionWillReturnFirstItem(): void
+    {
+        $result = Collection::firstOrNull(
+            [
+                'foo',
+                'bar',
+            ],
+        );
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testCountWithEmptyCollectionWillReturnZero(): void
+    {
+        $result = Collection::count([]);
+
+        self::assertSame(0, $result);
+    }
+
+    public function testCountWithOneItemCollectionWillReturnOne(): void
+    {
+        $result = Collection::count(['foo']);
+
+        self::assertSame(1, $result);
+    }
+
+    public function testCountWithTwoItemsCollectionWillReturnTwo(): void
+    {
+        $result = Collection::count(
+            [
+                'foo',
+                'bar',
+            ],
+        );
+
+        self::assertSame(2, $result);
     }
 
     public function testDeepGet(): void
