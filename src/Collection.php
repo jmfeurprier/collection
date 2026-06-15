@@ -68,13 +68,68 @@ class Collection
      * @param T[] $collection
      *
      * @return T|null
-     *
-     * @throws CollectionException
      */
     public static function firstOrNull(iterable $collection): mixed
     {
         foreach ($collection as $item) {
             return $item;
+        }
+
+        return null;
+    }
+
+    /**
+     * @template T
+     *
+     * @param T[] $collection
+     *
+     * @return T
+     *
+     * @throws CollectionException
+     */
+    public static function at(
+        iterable $collection,
+        int $position,
+    ): mixed {
+        $current = 0;
+
+        foreach ($collection as $item) {
+            if ($position === $current) {
+                return $item;
+            }
+
+            ++$current;
+        }
+
+        throw new CollectionException(
+            sprintf(
+                'No item at position %u in Collection.',
+                $position,
+            ),
+        );
+    }
+
+    /**
+     * @template T
+     *
+     * @param T[] $collection
+     *
+     * @return T|null
+     *
+     * @throws CollectionException
+     */
+    public static function atOrNull(
+        iterable $collection,
+        int $position,
+    ): mixed {
+        $current = 0;
+
+        foreach ($collection as $item) {
+            if ($position === $current) {
+                return $item;
+            }
+
+            ++$current;
         }
 
         return null;

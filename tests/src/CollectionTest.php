@@ -113,6 +113,112 @@ final class CollectionTest extends TestCase
         self::assertSame('foo', $result);
     }
 
+    public function testAtWithEmptyCollectionWillThrow(): void
+    {
+        self::expectException(CollectionException::class);
+
+        Collection::at([], 0);
+    }
+
+    public function testAtWithOneItemCollectionAndPositionZeroWillReturnItem(): void
+    {
+        $result = Collection::at(['foo'], 0);
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testAtWithManyItemsCollectionAndPositionZeroWillReturnFirstItem(): void
+    {
+        $result = Collection::at(
+            [
+                'foo',
+                'bar',
+            ],
+            0,
+        );
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testAtWithManyItemsCollectionAndPositionOneWillReturnSecondItem(): void
+    {
+        $result = Collection::at(
+            [
+                'foo',
+                'bar',
+            ],
+            1,
+        );
+
+        self::assertSame('bar', $result);
+    }
+
+    public function testAtWithOutOfBoundsPositionWillThrow(): void
+    {
+        self::expectException(CollectionException::class);
+
+        Collection::at(
+            [
+                'foo',
+                'bar',
+            ],
+            2,
+        );
+    }
+
+    public function testAtOrNullWithEmptyCollectionWillReturnNull(): void
+    {
+        $result = Collection::atOrNull([], 0);
+
+        self::assertNull($result);
+    }
+
+    public function testAtOrNullWithOneItemCollectionAndPositionZeroWillReturnItem(): void
+    {
+        $result = Collection::atOrNull(['foo'], 0);
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testAtOrNullWithManyItemsCollectionAndPositionZeroWillReturnFirstItem(): void
+    {
+        $result = Collection::atOrNull(
+            [
+                'foo',
+                'bar',
+            ],
+            0,
+        );
+
+        self::assertSame('foo', $result);
+    }
+
+    public function testAtOrNullWithManyItemsCollectionAndPositionOneWillReturnSecondItem(): void
+    {
+        $result = Collection::atOrNull(
+            [
+                'foo',
+                'bar',
+            ],
+            1,
+        );
+
+        self::assertSame('bar', $result);
+    }
+
+    public function testAtOrNullWithOutOfBoundsPositionWillReturnNull(): void
+    {
+        $result = Collection::atOrNull(
+            [
+                'foo',
+                'bar',
+            ],
+            2,
+        );
+
+        self::assertNull($result);
+    }
+
     public function testCountWithEmptyCollectionWillReturnZero(): void
     {
         $result = Collection::count([]);
