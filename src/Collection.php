@@ -115,8 +115,6 @@ class Collection
      * @param T[] $collection
      *
      * @return T|null
-     *
-     * @throws CollectionException
      */
     public static function atOrNull(
         iterable $collection,
